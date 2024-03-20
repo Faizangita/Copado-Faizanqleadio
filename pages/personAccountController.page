@@ -1,0 +1,177 @@
+<apex:page controller="personAccountController">
+    
+    <style>
+        /* Add your custom CSS styles here */
+        .form-container {
+            width: 60%;
+            margin: 0 auto;
+        }
+        
+        .form-header {
+            text-align: center;
+            background-color: #3670b6;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .form-header h2 {
+            margin: 0;
+            font-size: 30px;
+            font-family: "Calibri (Body)";
+        }
+        
+        .form-section {
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-label {
+            font-weight: bold;
+            font-size: 18px;
+            color: #103d75;
+        }
+        
+        .form-input {
+            width: 80%;
+            height: 80%; 
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .form-output {
+            width: 80%;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .form-select {
+            width: 50%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .form-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .form-button:hover {
+            background-color: #2980b9;
+        }
+        .help-tooltip {
+            cursor: help;
+            margin-left: 5px;
+        }
+        
+        .form-header,
+        .form-header td {
+            background-color: #3670b6;
+            color: #fff;
+            padding: 4px;
+            font-weight: bold;
+        }
+        
+        .form-row {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 4px;
+        }
+        
+        .form-column-rating,
+        .form-column-description {
+            padding: 4px;
+            border: 1px solid #ddd;
+        }
+        
+    </style>
+    
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Reviewer Form</h2>
+        </div>
+        <div class="form-section">
+            <apex:pageMessages />
+            <apex:form >
+                <apex:outputPanel rendered="{!NOT(isFormSubmitted)}">
+                    <apex:pageBlock >
+                        <apex:pageBlockSection columns="2">
+                            <div class="form-group">
+                                <label class="form-label" for="FirstName">FirstName:</label>
+                                <apex:outputText value="{!FirstName}" id="FirstName" styleClass="form-output"/>
+                            </div><br/>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="LastName">LastName:</label>
+                                <apex:outputText value="{!LastName}" id="LastName" styleClass="form-output"/>
+                            </div><br/>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="PersonEmail">PersonEmail:</label>
+                                <apex:outputText value="{!PersonEmail}" id="PersonEmail" styleClass="form-output" />
+                            </div><br/>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="Phone">Phone:</label>
+                                <apex:inputText value="{!Phone}" id="Phone" styleClass="form-input"/>
+                            </div><br/>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="Date_of_Birth__c">Date_of_Birth__c :</label>
+                                <apex:inputText value="{!Date_of_Birth_c}" id="Date_of_Birth__c" styleClass="form-input" />
+                            </div><br/>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="shoe_sizes__c">Shoe Size:</label>
+                                <apex:selectList value="{!shoe_sizes_c}" size="1" styleClass="form-select" required="true">
+                                    <apex:selectOptions value="{!shoeSizeOptions}" />
+                                </apex:selectList>
+                            </div><br/>    
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="T_shirt_sizes__c">T-Shirt Size:</label>
+                                <apex:selectList value="{!T_shirt_sizes_c}" size="1" styleClass="form-select" required="true">
+                                    <apex:selectOptions value="{!tShirtSizeOptions}" />
+                                </apex:selectList>
+                            </div><br/>
+                            
+                        </apex:pageBlockSection>
+                        
+                        <div style="text-align: center;">
+                            <apex:commandButton value="Save Review" action="{!saveReview}" styleClass="form-button" />
+                        </div>
+                    </apex:pageBlock>
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!isFormSubmitted}">
+                    <!--<div style="text-align: center; font-size=6px" >
+                        <h2>Thank you for your submission!</h2>
+                    </div>-->
+                </apex:outputPanel>
+                
+            </apex:form>
+        </div>
+    </div>
+</apex:page>
